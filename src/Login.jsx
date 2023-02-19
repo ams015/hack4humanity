@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
 // import './Login.css'
 import { Link, useHistory } from "react-router-dom";
 
-import { useState } from "react";
 import { Box, TextField, Button } from "@mui/material";
+import axios from "axios";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -20,7 +20,19 @@ const Login = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(`Username: ${username}, Password: ${password}`);
+    //console.log(`Username: ${username}, Password: ${password}`);
+    var userData = {
+      "userEmail": username,
+      "password": password
+    }
+    // Handle validations
+    axios
+    .post("main", userData)
+    .then(response => {
+      console.log(response)
+      // Handle response
+    })
+
   }
 
   return (
