@@ -1,7 +1,9 @@
 # Import flask and datetime module for showing date and time
+import psycopg2
 from flask import Flask, render_template, request, session, redirect, url_for, flash, jsonify, abort
 import datetime
 from flask_cors import CORS, cross_origin
+
 
 x = datetime.datetime.now()
 
@@ -28,9 +30,34 @@ def get_user_info():
 		return "Main page...(pending)"
 	if request.method == "POST":
 		print("POST method")
+		req=request.get_json(silent=True)
 		print(request.get_json()["password"])
+		print(request.get_json()["userEmail"])
+
+
+
+		user = 'postgres'
+		pw = 'vamsi'
+
+		conn = psycopg2.connect(
+		host="localhost",
+		database="flask_db",
+		user=user,  # os.environ['DB_USERNAME'],
+			 		password=pw)  # os.environ['DB_PASSWORD'])
+		print("here")
+	# Open a cursor to perform database operations
+		cur = conn.cursor()
+		print("type!!!")
+		print(type(req['userEmail']))
+		cur.execute('INSERT INTO  LOGINS(Email) VALUES (%s)',(req['userEmail'],))
+
+		print("here2")
+		conn.commit()
+
+		cur.close()
+		conn.close()
 		return "help"
-	
+#
 # Running app
 if __name__ == '__main__':
 	app.run(debug=True)
