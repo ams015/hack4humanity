@@ -20,17 +20,16 @@ def get_time():
 	    "programming":"python"
     })
 ########
-@app.route('/main', methods=['POST'])
+@app.route('/main', methods=['GET', 'POST'])
 @cross_origin(supports_credentials=True)
 def get_user_info():
+	if request.method == "GET":
+		print("GET method")
+		return "Main page...(pending)"
+	if request.method == "POST":
 		print("POST method")
 		print(request.get_json()["password"])
-		return redirect(url_for("http://127.0.0.1/main"))
-
-@app.route('/main', methods=['GET'])
-def show_main_page():
-	print("GET method")
-	return "Main page...(pending)"
+		return "help"
 	
 # Running app
 if __name__ == '__main__':
