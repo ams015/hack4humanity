@@ -30,8 +30,14 @@ const Login = () => {
     axios.post("main", userData).then((response) => {
       console.log(response);
       // Handle response
+      if (response.data === "fail") {
+          console.log("Login fail");
+      }
+      if (response.data === "success") {
+          navigate("/map");
+      }
     });
-    navigate("/map");
+
   }
 
   return (
