@@ -1,11 +1,12 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 // import './Login.css'
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useNavigate } from "react-router-dom";
 
 import { Box, TextField, Button } from "@mui/material";
 import axios from "axios";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   //   abcd
@@ -22,17 +23,15 @@ const Login = () => {
     event.preventDefault();
     //console.log(`Username: ${username}, Password: ${password}`);
     var userData = {
-      "userEmail": username,
-      "password": password
-    }
+      userEmail: username,
+      password: password,
+    };
     // Handle validations
-    axios
-    .post("main", userData)
-    .then(response => {
-      console.log(response)
+    axios.post("main", userData).then((response) => {
+      console.log(response);
       // Handle response
-    })
-
+    });
+    navigate("/map");
   }
 
   return (
@@ -77,9 +76,20 @@ const Login = () => {
           margin="normal"
           sx={{ mb: "20px" }}
         />
-        <Button type="submit" variant="contained">
+        <Button type="submit" variant="contained" sx={{ mb: "20px" }}>
           Login
         </Button>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <span style={{ paddingRight: "10px" }}>OR</span>
+          <Button
+            component={Link}
+            to="/signup"
+            variant="contained"
+            sx={{ backgroundColor: "#4caf50", color: "white", width: "100%" }}
+          >
+            Signup
+          </Button>
+        </Box>
       </Box>
     </Box>
   );
