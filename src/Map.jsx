@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { Snackbar } from "@material-ui/core";
 
 const Map = () => {
   const [location, setLocation] = useState({ latitude: null, longitude: null });
+  const [open, setOpen] = useState(false);
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       navigator.geolocation.getCurrentPosition(
@@ -21,8 +24,14 @@ const Map = () => {
   }, []);
 
   const handleSOSClick = () => {
-    // handle SOS click event here
-    console.log("SOS button clicked!");
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
   };
 
   return (
@@ -56,6 +65,13 @@ const Map = () => {
       >
         SOS
       </button>
+      <Snackbar
+        open={open}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        color="success"
+        message={"Help on the way, hold tight!"}
+      />
     </div>
   );
 };
