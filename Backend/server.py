@@ -47,11 +47,22 @@ def get_user_info():
 		print("here")
 	# Open a cursor to perform database operations
 		cur = conn.cursor()
-		print("type!!!")
+
 		print(type(req['userEmail']))
 		cur.execute('INSERT INTO  LOGINS(Email) VALUES (%s)',(req['userEmail'],))
 
-		print("here2")
+		cur.execute('select COUNT(*) from USERS where email=(%s)', (req['userEmail'],))
+
+		for table in cur.fetchall():
+			if table[0]<1:
+				conn.commit()
+
+				cur.close()
+				conn.close()
+				print("failed")
+				return
+				#need to modify
+		print("success")
 		conn.commit()
 
 		cur.close()
