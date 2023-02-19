@@ -20,22 +20,42 @@ const Map = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  //   useEffect(() => {
-  //     console.log(location.latitude, location.longitude);
-  //   }, [location]);
+  const handleSOSClick = () => {
+    // handle SOS click event here
+    console.log("SOS button clicked!");
+  };
 
   return (
-    <div className="map-container">
-      <iframe
-        title="Google Map"
-        width="600"
-        height="450"
-        frameBorder="0"
-        style={{ border: 0 }}
-        // src={`https://www.google.com/maps/embed/v1/view?key=AIzaSyAne-wDQnG40i8ukL3Y1-4zVdP88d5SM5o&center=${location.latitude},${location.longitude}&zoom=15`}
-        src={`https://www.google.com/maps/embed/v1/place?q=${location.latitude},${location.longitude}&key=AIzaSyAne-wDQnG40i8ukL3Y1-4zVdP88d5SM5o&zoom=18`}
-        allowFullScreen
-      />
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <div className="map-container" style={{ textAlign: "center" }}>
+        <iframe
+          title="Google Map"
+          width="600"
+          height="450"
+          frameBorder="0"
+          style={{ border: 0 }}
+          src={`https://www.google.com/maps/embed/v1/place?q=${location.latitude},${location.longitude}&key=AIzaSyAne-wDQnG40i8ukL3Y1-4zVdP88d5SM5o&zoom=18`}
+          allowFullScreen
+        />
+      </div>
+      <button
+        onClick={handleSOSClick}
+        style={{
+          backgroundColor: "red",
+          color: "white",
+          fontSize: "2rem",
+          padding: "1rem 2rem",
+          marginTop: "1rem",
+          border: "none",
+          borderRadius: "50%",
+          width: "10rem",
+          height: "10rem",
+        }}
+      >
+        SOS
+      </button>
     </div>
   );
 };
