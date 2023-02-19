@@ -51,7 +51,7 @@ def get_user_info():
 		print(type(req['userEmail']))
 		cur.execute('INSERT INTO  LOGINS(Email) VALUES (%s)',(req['userEmail'],))
 
-		cur.execute('select COUNT(*) from USERS where email=(%s)', (req['userEmail'],))
+		cur.execute('select COUNT(*) from USERS where email=(%s) and password=(%s)', (req['userEmail'],req['password']))
 
 		for table in cur.fetchall():
 			if table[0]<1:
