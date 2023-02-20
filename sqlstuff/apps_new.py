@@ -16,7 +16,7 @@ from flask import request
 
 app = Flask(__name__)
 username='postgres'
-pw='5240Young'
+pw='vamsi'
 
 
 # Open a cursor to perform database operations

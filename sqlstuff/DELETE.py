@@ -3,7 +3,7 @@ import psycopg2
 
 
 user='postgres'
-pw='5240Young'
+pw='vamsi'
 
 conn = psycopg2.connect(
         host="localhost",
